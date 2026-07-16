@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand & Translation Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#0B0F19',
+                        brandCard: '#151D30',
+                        brandBorder: '#222F4C',
+                        brandAccent: '#E0A96D',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0F19;
+            background-image: url('https://img.magnific.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?semt=ais_hybrid&w=740&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #F3F4F6;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F2937;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12 antialiased">
+
+    <!-- Header -->
+    <header class="border-b border-brandBorder bg-brandCard/50 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-yellow-500 to-amber-600 p-2.5 rounded-xl shadow-lg shadow-yellow-500/10">
+                    <i data-lucide="globe" class="w-5 h-5 text-brandDark"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight text-white flex items-center gap-2">
+                        Brand<span class="text-yellow-500">Hub</span>
+                    </h1>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-xs text-gray-500 font-mono bg-brandCard px-3 py-1.5 rounded-lg border border-brandBorder">ПКМ на любой флаг для управления GEO</span>
+                <span class="text-xs text-gray-500 font-mono">v1.8</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Action bar (Search & Add Brand) -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div class="relative flex-1 max-w-md">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="h-5 w-5 text-gray-400"></i>
+                </div>
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Поиск бренда, GEO или ключей..." 
+                    class="block w-full pl-10 pr-4 py-3 border border-brandBorder rounded-xl bg-brandCard text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
+                >
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button 
+                    onclick="openAddModal()"
+                    class="flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-brandDark font-semibold px-5 py-3 rounded-xl shadow-lg shadow-yellow-500/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 w-full md:w-auto"
+                >
+                    <i data-lucide="plus-circle" class="w-5 h-5"></i>
+                    Добавить бренд
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards Grid Container -->
+        <div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-base font-bold text-gray-400 flex items-center gap-2 uppercase tracking-wider">
+                    <i data-lucide="layers" class="w-4 h-4 text-yellow-500"></i>
+                    Бренды в работе
+                </h2>
+                <span class="text-xs text-gray-500" id="results-count">Показана 1 карточка</span>
+            </div>
+            
+            <div id="brands-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Cards dynamically loaded here -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal: Add Brand -->
+    <div id="add-modal" class="fixed inset-0 bg-brandDark/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-brandCard border border-brandBorder rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl transform scale-95 transition-all duration-300">
+            <div class="px-6 py-4 border-b border-brandBorder flex items-center justify-between bg-brandDark/40">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="plus" class="w-5 h-5 text-yellow-500"></i>
+                    Добавить бренд
+                </h3>
+                <button onclick="closeAddModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form id="add-brand-form" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5" for="brandName">Название бренда *</label>
+                    <input type="text" id="brandName" required placeholder="Например: Bet365" class="w-full px-4 py-2.5 bg-brandDark border border-brandBorder rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5" for="brandLogo">Ссылка на логотип</label>
+                    <input type="text" id="brandLogo" value="https://hapka.pw/sCVEe" placeholder="Вставьте ссылку на логотип бренда" class="w-full px-4 py-2.5 bg-brandDark border border-brandBorder rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    <p class="text-[10px] text-gray-500 mt-1">По умолчанию установлена рабочая ссылка на логотип Bwin.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">GEO страны (Выберите нужные)</label>
+                    <div class="grid grid-cols-3 gap-2 bg-brandDark p-3 rounded-xl border border-brandBorder max-h-[140px] overflow-y-auto" id="geo-checkboxes">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5" for="brandKeys">Базовые ключевые слова (через запятую)</label>
+                    <textarea id="brandKeys" rows="3" required placeholder="bwin, bwin casino, bwin app" class="w-full px-4 py-2.5 bg-brandDark border border-brandBorder rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm"></textarea>
+                    <p class="text-[10px] text-gray-500 mt-1">Эти ключи скопируются во все выбранные GEO. Настроить GEO индивидуально можно по ПКМ на флаг.</p>
+                </div>
+                <div class="pt-4 border-t border-brandBorder flex items-center justify-end space-x-3">
+                    <button type="button" onclick="closeAddModal()" class="px-5 py-2.5 rounded-xl border border-brandBorder bg-brandDark hover:bg-brandDark/70 text-gray-300 font-semibold text-sm transition-colors">Отмена</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-brandDark font-semibold text-sm transition-all shadow-lg shadow-yellow-500/10">Создать карточку</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Manage & Edit GEO (Triggered via Right Click on Flag) -->
+    <div id="geo-edit-modal" class="fixed inset-0 bg-brandDark/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-brandCard border border-yellow-500/30 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl transform scale-95 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-brandBorder flex items-center justify-between bg-brandDark/40">
+                <div>
+                    <span id="edit-modal-subtitle" class="text-[10px] text-yellow-500 uppercase tracking-widest font-bold">УПРАВЛЕНИЕ GEO</span>
+                    <h3 id="edit-modal-title" class="text-lg font-black text-white flex items-center gap-2 mt-0.5">
+                        <!-- Filled dynamically -->
+                    </h3>
+                </div>
+                <button onclick="closeGeoEditModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
+                
+                <!-- Edit Keys Section of currently right-clicked GEO -->
+                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                    <div class="flex items-center gap-2">
+                        <img id="active-edit-flag" src="" alt="" class="w-6 h-4.5 object-cover rounded-sm">
+                        <span id="active-edit-geoname" class="text-sm font-extrabold text-white"></span>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Ключевые слова (через запятую):</label>
+                        <!-- Added ondblclick="this.select()" to easily select all keys in 2 clicks -->
+                        <textarea id="active-edit-keys-input" ondblclick="this.select()" rows="3" class="w-full px-4 py-2.5 bg-brandDark border border-brandBorder rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm" placeholder="Дважды кликните здесь для выделения всех ключей"></textarea>
+                        <p class="text-[9px] text-gray-500 mt-1">💡 Дважды кликните в поле ввода выше, чтобы мгновенно выделить все ключевые слова.</p>
+                    </div>
+                </div>
+
+                <!-- List of existing GEOs with delete option -->
+                <div class="space-y-2">
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Все GEO этого бренда:</label>
+                    <div id="edit-geos-list" class="space-y-2 max-h-[140px] overflow-y-auto pr-1">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Add New GEO directly to this brand -->
+                <div class="pt-4 border-t border-brandBorder space-y-2">
+                    <label class="block text-[10px] font-bold text-yellow-500 uppercase tracking-wider">Добавить новую страну к бренду:</label>
+                    <div class="flex gap-2">
+                        <select id="edit-new-geo-select" class="flex-1 bg-brandDark border border-brandBorder rounded-xl text-xs p-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-500">
+                            <!-- Filled dynamically -->
+                        </select>
+                        <button 
+                            onclick="addGeoToActiveBrand()"
+                            class="px-5 py-3 bg-yellow-500 hover:bg-yellow-600 text-brandDark font-bold text-xs rounded-xl transition-all"
+                        >
+                            Добавить GEO
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 border-t border-brandBorder flex items-center justify-end space-x-3 bg-brandDark/20">
+                <button type="button" onclick="closeGeoEditModal()" class="px-5 py-2.5 rounded-xl border border-brandBorder bg-brandDark hover:bg-brandDark/70 text-gray-300 font-semibold text-xs transition-colors">Отмена</button>
+                <button type="button" onclick="saveGeoEditChanges()" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-brandDark font-bold text-xs transition-all shadow-lg shadow-yellow-500/10">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Logo URL (Triggered via Right Click on Brand Avatar) -->
+    <div id="logo-edit-modal" class="fixed inset-0 bg-brandDark/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-brandCard border border-yellow-500/30 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl transform scale-95 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-brandBorder flex items-center justify-between bg-brandDark/40">
+                <div>
+                    <span class="text-[10px] text-yellow-500 uppercase tracking-widest font-bold">ОФОРМЛЕНИЕ БРЕНДА</span>
+                    <h3 id="logo-modal-title" class="text-base font-black text-white flex items-center gap-2 mt-0.5">
+                        <i data-lucide="image" class="w-4 h-4 text-yellow-500"></i>
+                        Сменить логотип
+                    </h3>
+                </div>
+                <button onclick="closeLogoEditModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5" for="active-edit-logo-input">Прямая ссылка на логотип:</label>
+                    <input 
+                        type="text" 
+                        id="active-edit-logo-input" 
+                        ondblclick="this.select()"
+                        class="w-full px-4 py-2.5 bg-brandDark border border-brandBorder rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm" 
+                        placeholder="Вставьте ссылку на PNG, JPEG или SVG..."
+                    >
+                    <p class="text-[9px] text-gray-500 mt-2">💡 Рекомендуется использовать квадратное изображение на темном или прозрачном фоне.</p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 border-t border-brandBorder flex items-center justify-end space-x-3 bg-brandDark/20">
+                <button type="button" onclick="closeLogoEditModal()" class="px-5 py-2.5 rounded-xl border border-brandBorder bg-brandDark hover:bg-brandDark/70 text-gray-300 font-semibold text-xs transition-colors">Отмена</button>
+                <button type="button" onclick="saveLogoEditChanges()" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-brandDark font-bold text-xs transition-all shadow-lg shadow-yellow-500/10">Обновить лого</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Structure -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-300 pointer-events-none">
+        <div id="toast-bg" class="bg-gray-900 border border-emerald-500 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2">
+            <i id="toast-icon" data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
+            <span id="toast-text" class="text-sm font-medium">Ключ скопирован!</span>
+        </div>
+    </div>
+
+    <!-- Scripting and Database Management -->
+    <script>
+        const PREDEFINED_COUNTRIES = [
+            { code: 'GB', name: 'Глобальные', flag: 'gb' },
+            { code: 'ES', name: 'Испания', flag: 'es' },
+            { code: 'BR', name: 'Бразилия', flag: 'br' },
+            { code: 'DE', name: 'Германия', flag: 'de' },
+            { code: 'AT', name: 'Австрия', flag: 'at' },
+            { code: 'UA', name: 'Украина', flag: 'ua' },
+            { code: 'PL', name: 'Польша', flag: 'pl' },
+            { code: 'IT', name: 'Италия', flag: 'it' },
+            { code: 'FR', name: 'Франция', flag: 'fr' },
+            { code: 'KZ', name: 'Казахстан', flag: 'kz' },
+            { code: 'UZ', name: 'Узбекистан', flag: 'uz' },
+            { code: 'TR', name: 'Турция', flag: 'tr' },
+            { code: 'MX', name: 'Мексика', flag: 'mx' },
+        ];
+
+        // Core presets focusing on Bwin and Big Bass Bonanza with flag-specific keywords
+        let defaultBrandsData = [
+            {
+                id: 'bwin-preset-id',
+                name: 'Bwin',
+                logo: 'https://hapka.pw/sCVEe',
+                selectedGeoIndex: 0, 
+                geos: [
+                    { 
+                        code: 'GB', 
+                        name: 'Глобальные', 
+                        flag: 'gb', 
+                        keys: ['bwin', 'bwin casino', 'bwin app', 'b win', 'bwin bet', 'bwin download'] 
+                    },
+                    { 
+                        code: 'ES', 
+                        name: 'Испания', 
+                        flag: 'es', 
+                        keys: ['bwin españa', 'bwin casino es', 'bwin apuestas', 'bwin bono'] 
+                    },
+                    { 
+                        code: 'BR', 
+                        name: 'Бразилия', 
+                        flag: 'br', 
+                        keys: ['bwin brasil', 'bwin apostas', 'bwin cadastro', 'bwin app android'] 
+                    },
+                    { 
+                        code: 'DE', 
+                        name: 'Германия', 
+                        flag: 'de', 
+                        keys: ['bwin de', 'bwin sportwetten', 'bwin login de', 'bwin bonus code'] 
+                    },
+                    { 
+                        code: 'AT', 
+                        name: 'Австрия', 
+                        flag: 'at', 
+                        keys: ['bwin österreich', 'bwin sportwetten at', 'bwin premium wetten'] 
+                    }
+                ]
+            },
+            {
+                id: 'big-bass-preset-id',
+                name: 'Big Bass Bonanza',
+                logo: 'image_4b0fc5.png', // Fallback to upload or beautiful placeholder
+                selectedGeoIndex: 0,
+                geos: [
+                    {
+                        code: 'GB',
+                        name: 'Глобальные',
+                        flag: 'gb',
+                        keys: ['big bass bonanza', 'big bass bonanza slot', 'big bass bonanza free play', 'big bass bonanza demo', 'big bass slot']
+                    },
+                    {
+                        code: 'UA',
+                        name: 'Украина',
+                        flag: 'ua',
+                        keys: ['біг бас бонанза', 'грати біг бас бонанза', 'слот біг бас бонанза', 'демо біг бас', 'big bass bonanza украина']
+                    },
+                    {
+                        code: 'PL',
+                        name: 'Польша',
+                        flag: 'pl',
+                        keys: ['big bass bonanza polska', 'big bass bonanza slot pl', 'big bass bonanza zagraj za darmo']
+                    }
+                ]
+            }
+        ];
+
+        let brandsData = [];
+        let currentlyEditingBrandId = null;
+        let currentlyEditingGeoIndex = null;
+        let currentlyEditingLogoBrandId = null;
+
+        // On Load: Multi-version robust LocalStorage loading to protect Big Bass Bonanza and customized cards
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedData_v18 = localStorage.getItem('brand_hub_data_v1.8');
+            const savedData_v17 = localStorage.getItem('brand_hub_data_v1.7');
+            const savedData_v15 = localStorage.getItem('brand_hub_data_v1.5');
+            const savedData_generic = localStorage.getItem('brand_hub_data_v1.0');
+            
+            const rawSaved = savedData_v18 || savedData_v17 || savedData_v15 || savedData_generic;
+
+            if (rawSaved) {
+                try {
+                    brandsData = JSON.parse(rawSaved);
+                    
+                    // Safety check: Ensure Big Bass Bonanza is always saved / injected even if absent in user storage
+                    const hasBigBass = brandsData.some(b => b.name.toLowerCase().includes('big bass') || b.id === 'big-bass-preset-id');
+                    if (!hasBigBass) {
+                        const bigBassPreset = defaultBrandsData.find(b => b.id === 'big-bass-preset-id');
+                        if (bigBassPreset) {
+                            brandsData.push(bigBassPreset);
+                        }
+                    }
+                } catch(e) {
+                    console.error("Ошибка десериализации базы данных", e);
+                    brandsData = [...defaultBrandsData];
+                }
+            } else {
+                brandsData = [...defaultBrandsData];
+            }
+            
+            // Backup save using current version key
+            saveData();
+            
+            buildGeoCheckboxes();
+            renderBrands();
+            lucide.createIcons();
+
+            document.getElementById('search-input').addEventListener('input', () => {
+                renderBrands();
+            });
+        });
+
+        // Fill modal checkboxes dynamically for new brand creations
+        function buildGeoCheckboxes() {
+            const container = document.getElementById('geo-checkboxes');
+            container.innerHTML = '';
+            PREDEFINED_COUNTRIES.forEach(country => {
+                const div = document.createElement('label');
+                div.className = "flex items-center space-x-2 bg-brandCard/60 p-2 rounded-lg border border-brandBorder/30 cursor-pointer hover:border-yellow-500/50 transition-all text-xs";
+                div.innerHTML = `
+                    <input type="checkbox" value="${country.code}" class="rounded text-yellow-500 bg-brandDark border-brandBorder focus:ring-yellow-500 h-4 w-4">
+                    <img src="https://flagcdn.com/w40/${country.flag}.png" alt="${country.name}" class="w-5 h-3.5 object-cover rounded-sm shadow-sm">
+                    <span class="text-gray-300 font-medium truncate">${country.name}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Main rendering grid generator
+        function renderBrands() {
+            const grid = document.getElementById('brands-grid');
+            const searchVal = document.getElementById('search-input').value.toLowerCase().trim();
+            grid.innerHTML = '';
+
+            const filtered = brandsData.filter(brand => {
+                if (!searchVal) return true;
+                const matchesName = brand.name.toLowerCase().includes(searchVal);
+                const matchesKeys = brand.geos.some(g => g.keys.some(k => k.toLowerCase().includes(searchVal)));
+                const matchesGeo = brand.geos.some(g => 
+                    g.name.toLowerCase().includes(searchVal) || 
+                    g.code.toLowerCase().includes(searchVal)
+                );
+                return matchesName || matchesKeys || matchesGeo;
+            });
+
+            const counter = document.getElementById('results-count');
+            counter.innerText = `Найдено карточек: ${filtered.length}`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 flex flex-col items-center justify-center text-center">
+                        <div class="bg-brandCard/30 p-4 rounded-full border border-brandBorder mb-4">
+                            <i data-lucide="folder-open" class="w-8 h-8 text-gray-500"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-gray-300">Ничего не найдено</h3>
+                        <p class="text-xs text-gray-500 mt-1 max-w-sm">Попробуйте изменить поисковый запрос или добавить новый бренд.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filtered.forEach(brand => {
+                const cardWrapper = document.createElement('div');
+                // Added overflow-hidden to card wrapper to prevent overflow bugs
+                cardWrapper.className = "bg-brandCard border border-brandBorder rounded-3xl pt-[11%] px-[11%] pb-8 flex flex-col justify-between h-[550px] relative group shadow-lg overflow-hidden";
+                cardWrapper.id = `card-${brand.id}`;
+                
+                const activeGeoIndex = brand.selectedGeoIndex < brand.geos.length ? brand.selectedGeoIndex : 0;
+                const activeGeo = brand.geos[activeGeoIndex];
+
+                // Render keys with absolute single copy logic
+                const keysHtml = activeGeo.keys.map((key, idx) => {
+                    const isLast = idx === activeGeo.keys.length - 1;
+                    return `
+                        <span 
+                            onclick="copyText('${key.replace(/'/g, "\\'")}')"
+                            title="${key}"
+                            class="cursor-pointer hover:text-yellow-500 font-medium border-b border-dashed border-gray-600 hover:border-yellow-500 transition-all duration-150 inline-block text-[11px]"
+                        >${key}</span>${isLast ? '' : ', '}`;
+                }).join('');
+
+                const allKeysPlain = activeGeo.keys.join(', ');
+
+                // Flags row generator. Added Right Click event directly to each country button.
+                const geosHtml = brand.geos.map((geo, geoIndex) => {
+                    const isActive = geoIndex === activeGeoIndex;
+                    return `
+                        <button 
+                            onclick="selectGeo('${brand.id}', ${geoIndex})"
+                            oncontextmenu="handleFlagRightClick(event, '${brand.id}', ${geoIndex})"
+                            title="${geo.name}"
+                            class="geo-btn relative w-10 h-10 rounded-full flex items-center justify-center bg-brandDark border-2 shadow-sm transition-all duration-200 
+                            ${isActive ? 'border-yellow-500 scale-110 ring-2 ring-yellow-500/20' : 'border-brandBorder opacity-75 hover:opacity-100 hover:scale-105'}"
+                        >
+                            <img src="https://flagcdn.com/w80/${geo.flag}.png" alt="${geo.name}" class="w-6 h-4.5 object-cover rounded-sm">
+                        </button>
+                    `;
+                }).join('');
+
+                // Balanced Square Logo Container with strict max-h to solve overflow & ПКМ for editing image link
+                const logoContainer = `
+                    <div 
+                        oncontextmenu="handleLogoRightClick(event, '${brand.id}')"
+                        title="ПКМ: Изменить ссылку логотипа"
+                        class="aspect-square w-full max-h-[190px] overflow-hidden relative flex items-center justify-center mb-4 rounded-[32px] shadow-lg bg-brandDark/40 cursor-pointer hover:ring-2 hover:ring-yellow-500/30 transition-all duration-200"
+                    >
+                        <img 
+                            src="${brand.logo}" 
+                            alt="${brand.name}" 
+                            onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" 
+                            class="w-full h-full object-cover"
+                        />
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-brandCard to-brandDark p-2 hidden">
+                            <span class="text-lg font-black text-yellow-500 italic tracking-wider uppercase text-center">${brand.name}</span>
+                            <span class="text-[8px] text-gray-500 mt-1 font-mono text-center truncate max-w-full px-1">${brand.logo}</span>
+                        </div>
+                    </div>
+                `;
+
+                cardWrapper.innerHTML = `
+                    <div>
+                        <!-- Card Header Logo -->
+                        ${logoContainer}
+
+                        <!-- Brand Name (Safe static styling to prevent text blinking) -->
+                        <div class="text-center mb-3">
+                            <h3 class="text-lg font-extrabold text-white tracking-tight group-hover:text-yellow-500 transition-colors inline-block">
+                                ${brand.name}
+                            </h3>
+                        </div>
+
+                        <!-- Horizontal Flags Row (No extra line separators) -->
+                        <div class="flex flex-wrap items-center justify-center gap-3.5 mb-4">
+                            ${geosHtml}
+                        </div>
+                    </div>
+
+                    <!-- Keys Container perfectly centered inside the bottom zone without background -->
+                    <div class="mt-auto flex flex-col items-center justify-center text-center">
+                        <div 
+                            id="keys-header-${brand.id}"
+                            onclick="copyAllKeys('${allKeysPlain.replace(/'/g, "\\'")}')"
+                            title="Нажмите для копирования всех ключей!"
+                            class="keys-header-title inline-flex items-center justify-center gap-1.5 cursor-pointer group/keys mx-auto mb-2.5 text-[10px] font-extrabold tracking-widest uppercase text-gray-400 hover:text-yellow-500 transition-colors duration-200"
+                        >
+                            <i data-lucide="copy" class="w-3.5 h-3.5 text-gray-500 group-hover/keys:text-yellow-500"></i>
+                            <span>Ключевые слова (${activeGeo.code})</span>
+                        </div>
+                        <div id="keys-container-${brand.id}" class="keys-container-box w-full px-1 h-[110px] overflow-y-auto text-center leading-relaxed text-gray-400 scrollbar-thin">
+                            ${keysHtml}
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(cardWrapper);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Switch active GEO tab inside a card without full-rebuilding (Solves Bwin logo blink completely)
+        function selectGeo(brandId, geoIndex) {
+            const brand = brandsData.find(b => b.id === brandId);
+            if (brand) {
+                brand.selectedGeoIndex = geoIndex;
+                saveData();
+                
+                // Target changes directly in current card DOM instead of doing full reset
+                const card = document.getElementById(`card-${brandId}`);
+                if (card) {
+                    const activeGeo = brand.geos[geoIndex];
+                    
+                    // 1. Update flags styling
+                    const flagButtons = card.querySelectorAll('.geo-btn');
+                    flagButtons.forEach((btn, idx) => {
+                        if (idx === geoIndex) {
+                            btn.className = 'geo-btn relative w-10 h-10 rounded-full flex items-center justify-center bg-brandDark border-2 shadow-sm transition-all duration-200 border-yellow-500 scale-110 ring-2 ring-yellow-500/20';
+                        } else {
+                            btn.className = 'geo-btn relative w-10 h-10 rounded-full flex items-center justify-center bg-brandDark border-2 shadow-sm transition-all duration-200 border-brandBorder opacity-75 hover:opacity-100 hover:scale-105';
+                        }
+                    });
+                    
+                    // 2. Update keys header title text and copy reference
+                    const keysHeader = card.querySelector('.keys-header-title');
+                    if (keysHeader) {
+                        keysHeader.innerHTML = `
+                            <i data-lucide="copy" class="w-3.5 h-3.5 text-gray-500 group-hover/keys:text-yellow-500"></i>
+                            <span>Ключевые слова (${activeGeo.code})</span>
+                        `;
+                        const allKeysPlain = activeGeo.keys.join(', ');
+                        keysHeader.setAttribute('onclick', `copyAllKeys('${allKeysPlain.replace(/'/g, "\\'")}')`);
+                    }
+                    
+                    // 3. Update keys text content
+                    const keysContainer = card.querySelector('.keys-container-box');
+                    if (keysContainer) {
+                        const keysHtml = activeGeo.keys.map((key, idx) => {
+                            const isLast = idx === activeGeo.keys.length - 1;
+                            return `
+                                <span 
+                                    onclick="copyText('${key.replace(/'/g, "\\'")}')"
+                                    title="${key}"
+                                    class="cursor-pointer hover:text-yellow-500 font-medium border-b border-dashed border-gray-600 hover:border-yellow-500 transition-all duration-150 inline-block text-[11px]"
+                                >${key}</span>${isLast ? '' : ', '}`;
+                        }).join('');
+                        keysContainer.innerHTML = keysHtml;
+                    }
+                    
+                    lucide.createIcons();
+                }
+            }
+        }
+
+        // Right-click (ПКМ) on a flag handler: opens custom GEO config modal
+        function handleFlagRightClick(event, brandId, geoIndex) {
+            event.preventDefault(); // Stop native context menu
+            
+            const brand = brandsData.find(b => b.id === brandId);
+            if (!brand) return;
+
+            currentlyEditingBrandId = brandId;
+            currentlyEditingGeoIndex = geoIndex;
+
+            const activeGeo = brand.geos[geoIndex];
+            
+            // Set up active edit data inside modal
+            document.getElementById('edit-modal-title').innerText = `${brand.name}`;
+            document.getElementById('active-edit-flag').src = `https://flagcdn.com/w80/${activeGeo.flag}.png`;
+            document.getElementById('active-edit-geoname').innerText = `${activeGeo.name} (${activeGeo.code})`;
+            document.getElementById('active-edit-keys-input').value = activeGeo.keys.join(', ');
+
+            buildEditGeosList(brand);
+            buildEditNewGeoSelector(brand);
+
+            // Show custom Modal
+            const modal = document.getElementById('geo-edit-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.firstElementChild.classList.remove('scale-95');
+                modal.firstElementChild.classList.add('scale-100');
+            }, 50);
+
+            lucide.createIcons();
+        }
+
+        function closeGeoEditModal() {
+            const modal = document.getElementById('geo-edit-modal');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                currentlyEditingBrandId = null;
+                currentlyEditingGeoIndex = null;
+            }, 200);
+        }
+
+        // Right-click (ПКМ) on Brand Avatar handler: opens custom Logo config modal
+        function handleLogoRightClick(event, brandId) {
+            event.preventDefault(); // Prevent native right-click popup
+            
+            const brand = brandsData.find(b => b.id === brandId);
+            if (!brand) return;
+
+            currentlyEditingLogoBrandId = brandId;
+            document.getElementById('active-edit-logo-input').value = brand.logo;
+            
+            const modal = document.getElementById('logo-edit-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.firstElementChild.classList.remove('scale-95');
+                modal.firstElementChild.classList.add('scale-100');
+            }, 50);
+
+            lucide.createIcons();
+        }
+
+        function closeLogoEditModal() {
+            const modal = document.getElementById('logo-edit-modal');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                currentlyEditingLogoBrandId = null;
+            }, 200);
+        }
+
+        function saveLogoEditChanges() {
+            if (!currentlyEditingLogoBrandId) return;
+
+            const brand = brandsData.find(b => b.id === currentlyEditingLogoBrandId);
+            if (brand) {
+                const logoInput = document.getElementById('active-edit-logo-input').value.trim();
+                brand.logo = logoInput || 'https://hapka.pw/sCVEe'; // Fallback to preset Bwin logo if empty
+                
+                saveData();
+                renderBrands();
+                closeLogoEditModal();
+                showToast(`Логотип бренда ${brand.name} успешно обновлен!`);
+            }
+        }
+
+        // Build list of existing countries in Edit view with "Remove" functionality
+        function buildEditGeosList(brand) {
+            const listContainer = document.getElementById('edit-geos-list');
+            listContainer.innerHTML = '';
+
+            brand.geos.forEach((geo, index) => {
+                const item = document.createElement('div');
+                item.className = "flex flex-col gap-2 p-2.5 bg-brandDark/60 rounded-xl border border-brandBorder/40";
+                item.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://flagcdn.com/w40/${geo.flag}.png" alt="${geo.name}" class="w-5 h-3.5 object-cover rounded-sm">
+                            <span class="text-xs font-semibold text-gray-300">${geo.name} (${geo.code})</span>
+                        </div>
+                        <button 
+                            onclick="removeGeoFromEditView(${index})"
+                            class="text-gray-500 hover:text-red-500 p-1 rounded hover:bg-red-500/10 transition-colors"
+                            title="Удалить это GEO"
+                        >
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <!-- Added ondblclick="this.select()" to easily select all keys inside sub-items on double left-click -->
+                        <textarea 
+                            ondblclick="this.select()"
+                            onchange="updateSubGeoKeys(${index}, this.value)"
+                            placeholder="Ключи через запятую..."
+                            class="w-full px-3 py-1.5 bg-brandCard border border-brandBorder/60 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-yellow-500 text-xs"
+                            rows="2"
+                        >${geo.keys.join(', ')}</textarea>
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+
+        // Dynamically update geo keys from lists inside modal
+        function updateSubGeoKeys(geoIndex, textVal) {
+            const brand = brandsData.find(b => b.id === currentlyEditingBrandId);
+            if (brand && brand.geos[geoIndex]) {
+                const parsed = textVal.split(',')
+                    .map(k => k.trim())
+                    .filter(k => k.length > 0);
+                brand.geos[geoIndex].keys = parsed;
+                saveData();
+                // If we edited keys of the currently active modal GEO, update the main text area as well
+                if (currentlyEditingGeoIndex === geoIndex) {
+                    document.getElementById('active-edit-keys-input').value = parsed.join(', ');
+                }
+            }
+        }
+
+        // Filter out predefined countries already selected for this brand
+        function buildEditNewGeoSelector(brand) {
+            const selectEl = document.getElementById('edit-new-geo-select');
+            selectEl.innerHTML = '';
+
+            const currentCodes = brand.geos.map(g => g.code);
+            const available = PREDEFINED_COUNTRIES.filter(c => !currentCodes.includes(c.code));
+
+            if (available.length === 0) {
+                const opt = document.createElement('option');
+                opt.text = "Все GEO уже добавлены";
+                opt.disabled = true;
+                selectEl.appendChild(opt);
+                return;
+            }
+
+            available.forEach(country => {
+                const opt = document.createElement('option');
+                opt.value = country.code;
+                opt.text = `${country.name} (${country.code})`;
+                selectEl.appendChild(opt);
+            });
+        }
+
+        // Remove a GEO during edit modal session
+        function removeGeoFromEditView(index) {
+            const brand = brandsData.find(b => b.id === currentlyEditingBrandId);
+            if (!brand) return;
+
+            if (brand.geos.length <= 1) {
+                showToast("Нельзя удалить последнее GEO бренда!", true);
+                return;
+            }
+
+            const removedGeo = brand.geos[index];
+            brand.geos.splice(index, 1);
+            
+            // Recalculate selected geo indices to prevent out of bounds crashes
+            brand.selectedGeoIndex = 0;
+            currentlyEditingGeoIndex = 0;
+
+            saveData();
+            buildEditGeosList(brand);
+            buildEditNewGeoSelector(brand);
+
+            // Reload primary active state inside modal
+            const activeGeo = brand.geos[0];
+            document.getElementById('active-edit-flag').src = `https://flagcdn.com/w80/${activeGeo.flag}.png`;
+            document.getElementById('active-edit-geoname').innerText = `${activeGeo.name} (${activeGeo.code})`;
+            document.getElementById('active-edit-keys-input').value = activeGeo.keys.join(', ');
+
+            showToast(`GEO ${removedGeo.name} удалено`);
+            lucide.createIcons();
+        }
+
+        // Add a brand new GEO directly to this brand
+        function addGeoToActiveBrand() {
+            const brand = brandsData.find(b => b.id === currentlyEditingBrandId);
+            const selectEl = document.getElementById('edit-new-geo-select');
+            if (!brand || !selectEl || selectEl.disabled) return;
+
+            const code = selectEl.value;
+            const countryInfo = PREDEFINED_COUNTRIES.find(c => c.code === code);
+
+            if (countryInfo) {
+                const defaultNewKeys = ['bwin', 'bwin casino', 'bwin app']; // Default standard baseline keys
+                
+                brand.geos.push({
+                    code: countryInfo.code,
+                    name: countryInfo.name,
+                    flag: countryInfo.flag,
+                    keys: defaultNewKeys
+                });
+
+                saveData();
+                buildEditGeosList(brand);
+                buildEditNewGeoSelector(brand);
+
+                showToast(`Добавлена страна: ${countryInfo.name}!`);
+                lucide.createIcons();
+            }
+        }
+
+        // Save keys and geo configuration updates on form modal submit
+        function saveGeoEditChanges() {
+            const brand = brandsData.find(b => b.id === currentlyEditingBrandId);
+            if (!brand) return;
+
+            const inputKeysRaw = document.getElementById('active-edit-keys-input').value;
+            const parsedKeys = inputKeysRaw.split(',')
+                .map(k => k.trim())
+                .filter(k => k.length > 0);
+
+            // Apply keys directly to edited target country
+            brand.geos[currentlyEditingGeoIndex].keys = parsedKeys;
+            
+            saveData();
+            renderBrands();
+            closeGeoEditModal();
+            showToast(`Изменения для ${brand.name} успешно сохранены!`);
+        }
+
+        // Clipboard Copy Utility (Handles multiple environments securely)
+        function copyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Скопировано: "${text}"`, false);
+            } catch (err) {
+                console.error('Ошибка копирования', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function copyAllKeys(keysText) {
+            const textarea = document.createElement('textarea');
+            textarea.value = keysText;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Все ключевые слова скопированы!`, false);
+            } catch (err) {
+                console.error('Ошибка копирования', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Premium system notification banners
+        function showToast(message, isWarning = false) {
+            const toast = document.getElementById('toast');
+            const toastBg = document.getElementById('toast-bg');
+            const toastText = document.getElementById('toast-text');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastText.innerText = message;
+            
+            if (isWarning) {
+                toastBg.className = "bg-gray-900 border border-red-500 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2";
+                toastIcon.className = "w-5 h-5 text-red-500";
+                toastIcon.setAttribute('data-lucide', 'alert-circle');
+            } else {
+                toastBg.className = "bg-gray-900 border border-emerald-500 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2";
+                toastIcon.className = "w-5 h-5 text-emerald-400";
+                toastIcon.setAttribute('data-lucide', 'check-circle');
+            }
+            
+            lucide.createIcons();
+
+            toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-0 opacity-100 transition-all duration-300 pointer-events-auto";
+            
+            setTimeout(() => {
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-300 pointer-events-none";
+            }, 3000);
+        }
+
+        // Add Brand Creator Modal
+        function openAddModal() {
+            document.getElementById('add-modal').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('add-modal').firstElementChild.classList.remove('scale-95');
+                document.getElementById('add-modal').firstElementChild.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeAddModal() {
+            document.getElementById('add-modal').firstElementChild.classList.remove('scale-100');
+            document.getElementById('add-modal').firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                document.getElementById('add-modal').classList.add('hidden');
+                document.getElementById('add-brand-form').reset();
+            }, 200);
+        }
+
+        // Submitting new cards
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('brandName').value.trim();
+            const logo = document.getElementById('brandLogo').value.trim();
+            const keysRaw = document.getElementById('brandKeys').value;
+
+            const selectedCodes = [];
+            const checkboxes = document.querySelectorAll('#geo-checkboxes input[type="checkbox"]:checked');
+            checkboxes.forEach(cb => {
+                selectedCodes.push(cb.value);
+            });
+
+            if (selectedCodes.length === 0) {
+                showToast("Пожалуйста, выберите хотя бы одну страну (GEO)", true);
+                return;
+            }
+
+            const initialKeys = keysRaw.split(',')
+                .map(k => k.trim())
+                .filter(k => k.length > 0);
+
+            const geos = selectedCodes.map(code => {
+                const info = PREDEFINED_COUNTRIES.find(c => c.code === code);
+                return {
+                    code: info.code,
+                    name: info.name,
+                    flag: info.flag,
+                    keys: [...initialKeys] 
+                };
+            });
+
+            const newBrand = {
+                id: 'brand-id-' + Date.now(),
+                name: name,
+                logo: logo || 'https://hapka.pw/sCVEe',
+                selectedGeoIndex: 0,
+                geos: geos
+            };
+
+            brandsData.unshift(newBrand);
+            saveData();
+            
+            renderBrands();
+            closeAddModal();
+            showToast(`Бренд ${name} успешно добавлен!`);
+        }
+
+        // LocalStorage database synchronizer using active version keys
+        function saveData() {
+            localStorage.setItem('brand_hub_data_v1.8', JSON.stringify(brandsData));
+        }
+    </script>
+</body>
+</html>
