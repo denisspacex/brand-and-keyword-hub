@@ -224,7 +224,7 @@
         const CORE_BRAND_IDS = [
             'bet365', 'betmgm', 'apuestatotal', 'unibet', 'jackpotcity', 'leovegas', 'favbet', 'bwin', 
             'betnacional', 'winspirit', 'fortunacasino', 'goldbet', 'totalcasino', 'vbet', 'casinoniagara', 
-            'casinomontreal', '711casino'
+            'casinomontreal', '711casino', 'roobet'
         ];
 
         // Trash brands list
@@ -365,6 +365,36 @@
             { id: 'big-bass-bonanza', name: 'Big Bass Bonanza', logo: 'https://images.igamingcloud.com/game/pragmatic/big-bass-bonanza/logo.png' }
         ];
 
+        /* 
+         * ====================================================================
+         * 💡 ИНСТРУКЦИЯ ПО ДОБАВЛЕНИЮ КЛЮЧЕЙ И GEO В КОД:
+         * Чтобы добавить свои GEO и ключи любому бренду, просто напиши его ID
+         * в объект CUSTOM_BRAND_GEOS ниже! (Пример с 1win и goldbet уже показан).
+         * ====================================================================
+         */
+        const CUSTOM_BRAND_GEOS = {
+            'goldbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['goldbet', 'goldbet app', 'goldbet bet', 'gold bet', 'goldenbet', 'golden bet', 'golbet', 'gol bet'] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: ['goldbet sportive', 'goldbet scommesse sportive', 'goldbet scommesse', 'goldbet scommesse sportive app'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] }
+            ],
+            '1win': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['1win', '1win casino', '1win bk'] },
+                { code: 'KZ', name: 'Казахстан', flag: 'kz', keys: ['1win kz', '1win вход'] },
+                { code: 'UA', name: 'Украина', flag: 'ua', keys: ['1win ua', '1win скачати'] }
+            ]
+            'roobet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet casino', 'roobet crypto casino', 'roobet game', 'roo bet, roobet game app money'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'CA', name: 'Канада', flag: 'ca', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
+            ]
+            // Сюда можно просто добавлять новые бренды по их ID:
+            // 'bet365': [ ... ],
+        };
+
         let defaultBrandsData = brandNames.map(b => {
             const formattedName = b.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             
@@ -376,39 +406,18 @@
                 category = 'trash';
             }
 
-            // Custom global multi-GEO configuration for GoldBet
-            if (b.id === 'goldbet') {
+            // Check if this brand has custom GEO settings in CUSTOM_BRAND_GEOS
+            if (CUSTOM_BRAND_GEOS[b.id]) {
                 return {
-                    id: 'goldbet',
-                    name: 'GoldBet',
+                    id: b.id,
+                    name: formattedName,
                     logo: b.logo,
                     category: category,
-                    geos: [
-                        { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['goldbet', 'goldbet app', 'goldbet bet', 'gold bet', 'goldenbet', 'golden bet', 'golbet', 'gol bet'] },
-                        { code: 'IT', name: 'Италия', flag: 'it', keys: ['goldbet sportive', 'goldbet scommesse sportive', 'goldbet scommesse', 'goldbet scommesse sportive app'] },
-                        { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
-                        { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
-                        { code: 'ES', name: 'Испания', flag: 'es', keys: [] }
-                    ]
+                    geos: CUSTOM_BRAND_GEOS[b.id]
                 };
             }
 
-             if (b.id === 'roobet') {
-                return {
-                    id: 'roobet',
-                    name: 'Roobet',
-                    logo: b.logo,
-                    category: category,
-                    geos: [
-                        { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet', 'roobet casino', 'roo bet', 'roobet crypto casino', 'roobet game', 'roobet game app money'] },
-                        { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
-                        { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
-                        { code: 'CA', name: 'Канада', flag: 'ca', keys: [] }
-                    ]
-                };
-            }
-
-            // Standard one default global geo for all other brands
+            // Standard default global geo for all other brands
             return {
                 id: b.id,
                 name: formattedName,
@@ -424,7 +433,7 @@
         let brands = [];
         let activeTab = 'all';
 
-        // Load existing databases safely with direct code overrides for images, categorizations, and GoldBet
+        // Load existing databases safely with direct code overrides for images, categorizations, and Custom GEOs
         function initDatabase() {
             try {
                 let saved = localStorage.getItem(DB_KEY) || 
@@ -442,8 +451,9 @@
                                 existing.logo = def.logo; // Keep code-defined logos prioritized!
                                 existing.name = def.name; 
                                 existing.category = def.category; 
-                                // FORCE OVERRIDE for goldbet and default brands structure when modified
-                                if (def.id === 'goldbet') {
+                                
+                                // FORCE OVERRIDE for brands that are defined in CUSTOM_BRAND_GEOS
+                                if (CUSTOM_BRAND_GEOS[def.id]) {
                                     existing.geos = JSON.parse(JSON.stringify(def.geos));
                                 } else if (!existing.geos || existing.geos.length === 0) {
                                     existing.geos = JSON.parse(JSON.stringify(def.geos));
