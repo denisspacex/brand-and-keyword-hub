@@ -40,14 +40,12 @@
             color: #F3F4F6;
         }
         
-        /* Ultra-smooth and heavy 3D Tilt Card Base Styles with Hardware Acceleration */
         .tilt-card {
             transform-style: preserve-3d;
             transition: transform 0.5s cubic-bezier(0.1, 0.8, 0.3, 1), box-shadow 0.5s ease, border-color 0.3s ease;
             will-change: transform;
         }
 
-        /* Micro thin scrollbar for keys */
         .keys-scrollbar::-webkit-scrollbar {
             width: 3px;
             height: 3px;
@@ -63,13 +61,12 @@
             background: #E0A96D;
         }
 
-        /* Completely hide scrollbars for flags and other containers */
         .no-scrollbar::-webkit-scrollbar {
             display: none !important;
         }
         .no-scrollbar {
-            -ms-overflow-style: none !important;  /* IE and Edge */
-            scrollbar-width: none !important;  /* Firefox */
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
         }
     </style>
 </head>
@@ -78,14 +75,12 @@
     <!-- Header -->
     <header class="border-b border-brandBorder bg-brandCard/50 backdrop-blur-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex flex-col md:flex-row items-center justify-between gap-4 py-2">
-            <!-- Brand Title: lowercase, white, no icon -->
             <div class="flex items-center">
                 <h1 class="text-lg font-extrabold tracking-tight text-white select-none">
                     brand & keyword hub
                 </h1>
             </div>
 
-            <!-- Central Tab Navigation -->
             <div class="flex flex-wrap items-center justify-center bg-brandDark/40 p-1.5 rounded-2xl border border-brandBorder/60 gap-1">
                 <button onclick="setActiveTab('all')" id="tab-all" class="px-4 py-2 text-xs font-bold rounded-xl transition-all text-white bg-yellow-500/10 border border-yellow-500/20">all brands</button>
                 <button onclick="setActiveTab('core')" id="tab-core" class="px-4 py-2 text-xs font-bold rounded-xl transition-all text-gray-400 hover:text-white hover:bg-brandDark/40">core brands</button>
@@ -93,7 +88,6 @@
                 <button onclick="setActiveTab('trash')" id="tab-trash" class="px-4 py-2 text-xs font-bold rounded-xl transition-all text-gray-400 hover:text-white hover:bg-brandDark/40">trash brands</button>
             </div>
             
-            <!-- Search input in Header Right -->
             <div class="relative w-72 sm:w-80">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i data-lucide="search" class="h-4 w-4 text-gray-400"></i>
@@ -110,8 +104,6 @@
 
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        
-        <!-- Cards Grid Container -->
         <div>
             <div class="flex items-center justify-between mb-6 border-b border-brandBorder/40 pb-4">
                 <h2 id="active-tab-title" class="text-sm font-bold text-gray-400 flex items-center gap-2 uppercase tracking-widest">
@@ -124,29 +116,22 @@
                 <!-- Cards dynamically loaded here -->
             </div>
         </div>
-
     </main>
 
-    <!-- Modal: Manage & Edit GEO (Triggered via Right Click on Flag) -->
+    <!-- Modal: Manage & Edit GEO -->
     <div id="geo-edit-modal" class="fixed inset-0 bg-brandDark/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-brandCard border border-yellow-500/30 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl transform scale-95 transition-all duration-300">
-            <!-- Modal Header -->
             <div class="px-6 py-4 border-b border-brandBorder flex items-center justify-between bg-brandDark/40">
                 <div>
                     <span id="edit-modal-subtitle" class="text-[10px] text-yellow-500 uppercase tracking-widest font-bold">УПРАВЛЕНИЕ GEO</span>
-                    <h3 id="edit-modal-title" class="text-lg font-black text-white flex items-center gap-2 mt-0.5">
-                        <!-- Filled dynamically -->
-                    </h3>
+                    <h3 id="edit-modal-title" class="text-lg font-black text-white flex items-center gap-2 mt-0.5"></h3>
                 </div>
                 <button onclick="closeGeoEditModal()" class="text-gray-400 hover:text-white transition-colors">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
             
-            <!-- Modal Body -->
             <div class="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
-                
-                <!-- Edit Keys Section of currently right-clicked GEO -->
                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                     <div class="flex items-center gap-2">
                         <img id="active-edit-flag" src="" alt="" class="w-6 h-4.5 object-cover rounded-sm">
@@ -159,34 +144,23 @@
                     </div>
                 </div>
 
-                <!-- List of existing GEOs with delete option -->
                 <div class="space-y-2">
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Все GEO этого бренда:</label>
-                    <div id="edit-geos-list" class="space-y-2 max-h-[140px] overflow-y-auto pr-1">
-                        <!-- Filled by JS -->
-                    </div>
+                    <div id="edit-geos-list" class="space-y-2 max-h-[140px] overflow-y-auto pr-1"></div>
                 </div>
 
-                <!-- Add New GEO directly to this brand -->
                 <div id="add-geo-section" class="pt-4 border-t border-brandBorder space-y-2">
                     <label class="block text-[10px] font-bold text-yellow-500 uppercase tracking-wider">Добавить новую страну к бренду:</label>
                     <div class="flex gap-2">
-                        <select id="edit-new-geo-select" class="flex-1 bg-brandDark border border-brandBorder rounded-xl text-xs p-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-500">
-                            <!-- Filled dynamically -->
-                        </select>
-                        <button 
-                            onclick="addGeoToActiveBrand()"
-                            class="px-5 py-3 bg-yellow-500 hover:bg-yellow-600 text-brandDark font-bold text-xs rounded-xl transition-all"
-                        >
+                        <select id="edit-new-geo-select" class="flex-1 bg-brandDark border border-brandBorder rounded-xl text-xs p-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-500"></select>
+                        <button onclick="addGeoToActiveBrand()" class="px-5 py-3 bg-yellow-500 hover:bg-yellow-600 text-brandDark font-bold text-xs rounded-xl transition-all">
                             Добавить GEO
                         </button>
                     </div>
                     <span id="geo-limit-warning" class="text-[10px] text-red-400 font-semibold hidden">Достигнут лимит в 7 GEO. Удалите одну из стран, чтобы добавить новую.</span>
                 </div>
-
             </div>
 
-            <!-- Modal Footer -->
             <div class="px-6 py-4 border-t border-brandBorder flex items-center justify-end space-x-3 bg-brandDark/20">
                 <button type="button" onclick="closeGeoEditModal()" class="px-5 py-2.5 rounded-xl border border-brandBorder bg-brandDark hover:bg-brandDark/70 text-gray-300 font-semibold text-xs transition-colors">Отмена</button>
                 <button type="button" onclick="saveGeoEditChanges()" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-brandDark font-bold text-xs transition-all shadow-lg shadow-yellow-500/10">Сохранить изменения</button>
@@ -194,7 +168,7 @@
         </div>
     </div>
 
-    <!-- Toast Notification Structure -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-300 pointer-events-none">
         <div id="toast-bg" class="bg-gray-900 border border-emerald-500 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2">
             <i id="toast-icon" data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
@@ -220,17 +194,38 @@
             { code: 'MX', name: 'Мексика', flag: 'mx' },
         ];
 
-        // Core brands list requested by the user
         const CORE_BRAND_IDS = [
             'bet365', 'betmgm', 'apuestatotal', 'unibet', 'jackpotcity', 'leovegas', 'favbet', 'bwin', 
             'betnacional', 'winspirit', 'fortunacasino', 'goldbet', 'totalcasino', 'vbet', 'casinoniagara', 
             'casinomontreal', '711casino', 'roobet'
         ];
 
-        // Trash brands list
         const TRASH_BRAND_IDS = ['bran', 'worldcupbet'];
 
-        // Core official logos provided by user directly
+        /* 
+         * 💡 НАСТРОЙКА GEO И КЛЮЧЕЙ ИЗ КОДА
+         */
+        const CUSTOM_BRAND_GEOS = {
+            'goldbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['goldbet', 'goldbet app', 'goldbet bet', 'gold bet', 'goldenbet', 'golden bet', 'golbet', 'gol bet'] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: ['goldbet sportive', 'goldbet scommesse sportive', 'goldbet scommesse', 'goldbet scommesse sportive app'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] }
+            ],
+            '1win': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['1win', '1win casino', '1win bk'] },
+                { code: 'KZ', name: 'Казахстан', flag: 'kz', keys: ['1win kz', '1win вход'] },
+                { code: 'UA', name: 'Украина', flag: 'ua', keys: ['1win ua', '1win скачати'] }
+            ]
+            'roobet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet casino', 'roobet crypto casino', 'roobet game', 'roo bet, roobet game app money'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'CA', name: 'Канада', flag: 'ca', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
+            ]
+        };
+
         const brandNames = [
             { id: '1win', name: '1Win', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcP8iFNA29EaGo0yCOV5OXeGoMNo3nAFMHUxgW84skMQ&s=10' },
             { id: '1xbet', name: '1xBet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3QIzlBG4kFkBKP-5rkft9tKc2I7w8g4rcyKAQs3xt6g&s=10' },
@@ -365,40 +360,9 @@
             { id: 'big-bass-bonanza', name: 'Big Bass Bonanza', logo: 'https://images.igamingcloud.com/game/pragmatic/big-bass-bonanza/logo.png' }
         ];
 
-        /* 
-         * ====================================================================
-         * 💡 ИНСТРУКЦИЯ ПО ДОБАВЛЕНИЮ КЛЮЧЕЙ И GEO В КОД:
-         * Чтобы добавить свои GEO и ключи любому бренду, просто напиши его ID
-         * в объект CUSTOM_BRAND_GEOS ниже! (Пример с 1win и goldbet уже показан).
-         * ====================================================================
-         */
-        const CUSTOM_BRAND_GEOS = {
-            'goldbet': [
-                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['goldbet', 'goldbet app', 'goldbet bet', 'gold bet', 'goldenbet', 'golden bet', 'golbet', 'gol bet'] },
-                { code: 'IT', name: 'Италия', flag: 'it', keys: ['goldbet sportive', 'goldbet scommesse sportive', 'goldbet scommesse', 'goldbet scommesse sportive app'] },
-                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
-                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
-                { code: 'ES', name: 'Испания', flag: 'es', keys: [] }
-            ],
-            '1win': [
-                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['1win', '1win casino', '1win bk'] },
-                { code: 'KZ', name: 'Казахстан', flag: 'kz', keys: ['1win kz', '1win вход'] },
-                { code: 'UA', name: 'Украина', flag: 'ua', keys: ['1win ua', '1win скачати'] }
-            ]
-            'roobet': [
-                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet casino', 'roobet crypto casino', 'roobet game', 'roo bet, roobet game app money'] },
-                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
-                { code: 'CA', name: 'Канада', flag: 'ca', keys: [] },
-                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
-            ]
-            // Сюда можно просто добавлять новые бренды по их ID:
-            // 'bet365': [ ... ],
-        };
-
         let defaultBrandsData = brandNames.map(b => {
             const formattedName = b.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             
-            // Assign specific tabs based on requested rules
             let category = 'test';
             if (CORE_BRAND_IDS.includes(b.id)) {
                 category = 'core';
@@ -406,7 +370,6 @@
                 category = 'trash';
             }
 
-            // Check if this brand has custom GEO settings in CUSTOM_BRAND_GEOS
             if (CUSTOM_BRAND_GEOS[b.id]) {
                 return {
                     id: b.id,
@@ -417,7 +380,6 @@
                 };
             }
 
-            // Standard default global geo for all other brands
             return {
                 id: b.id,
                 name: formattedName,
@@ -433,7 +395,6 @@
         let brands = [];
         let activeTab = 'all';
 
-        // Load existing databases safely with direct code overrides for images, categorizations, and Custom GEOs
         function initDatabase() {
             try {
                 let saved = localStorage.getItem(DB_KEY) || 
@@ -444,22 +405,20 @@
                 if (saved) {
                     let parsed = JSON.parse(saved);
                     if (Array.isArray(parsed) && parsed.length > 0) {
-                        // Enforce updated official logo links and configurations directly from code
                         defaultBrandsData.forEach(def => {
                             let existing = parsed.find(b => b.id === def.id);
                             if (existing) {
-                                existing.logo = def.logo; // Keep code-defined logos prioritized!
+                                existing.logo = def.logo;
                                 existing.name = def.name; 
                                 existing.category = def.category; 
                                 
-                                // FORCE OVERRIDE for brands that are defined in CUSTOM_BRAND_GEOS
                                 if (CUSTOM_BRAND_GEOS[def.id]) {
                                     existing.geos = JSON.parse(JSON.stringify(def.geos));
                                 } else if (!existing.geos || existing.geos.length === 0) {
                                     existing.geos = JSON.parse(JSON.stringify(def.geos));
                                 }
                             } else {
-                                parsed.push(JSON.parse(JSON.stringify(def))); // Add if not existing
+                                parsed.push(JSON.parse(JSON.stringify(def)));
                             }
                         });
                         brands = parsed;
@@ -493,7 +452,6 @@
             setupTiltEffect();
             lucide.createIcons();
             
-            // Block context menu global override on logos
             document.addEventListener('contextmenu', function(e) {
                 if (e.target.closest('.brand-logo-img') || e.target.closest('.brand-logo-container')) {
                     e.preventDefault();
@@ -504,7 +462,6 @@
         function setActiveTab(tab) {
             activeTab = tab;
             
-            // Highlight current tab button
             const tabButtons = ['all', 'core', 'test', 'trash'];
             tabButtons.forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
@@ -515,9 +472,7 @@
                 }
             });
 
-            // Update page subtitle in lowercase
             document.getElementById('active-tab-title').textContent = `${tab} brands`;
-
             renderBrands(document.getElementById('search-input').value);
         }
 
@@ -527,12 +482,10 @@
             
             let filtered = brands;
 
-            // Apply Tab filter
             if (activeTab !== 'all') {
                 filtered = filtered.filter(b => b.category === activeTab);
             }
 
-            // Apply Search Query filter
             if (filterText.trim()) {
                 const query = filterText.toLowerCase();
                 filtered = filtered.filter(b => {
@@ -546,7 +499,6 @@
             document.getElementById('results-count').textContent = `Найдено брендов: ${filtered.length}`;
 
             filtered.forEach(brand => {
-                // Compile all geo keys into a format for AI text prompt
                 const compiledKeysString = brand.geos.map(g => {
                     const prefix = g.code.toLowerCase() === 'gb' ? 'global' : g.code.toLowerCase();
                     return `${prefix}: ${g.keys.join(', ')}`;
@@ -556,7 +508,6 @@
                     <div class="tilt-card bg-brandCard border border-brandBorder/60 rounded-[32px] overflow-hidden shadow-2xl relative h-[550px] flex flex-col pt-[11%] px-[11%] pb-8 hover:border-yellow-500/30 transition-colors" 
                          data-brand-id="${brand.id}">
                         
-                        <!-- Logo Area filling the entire container: object-cover, no padding, no double-borders -->
                         <div class="w-full aspect-square flex items-center justify-center overflow-hidden rounded-[32px] select-none relative brand-logo-container">
                             <img src="${brand.logo}" 
                                  alt="${brand.name}" 
@@ -564,15 +515,11 @@
                                  onerror="this.src='https://placehold.co/200x200/151D30/E0A96D?text=${brand.name}'">
                         </div>
 
-                        <!-- Content Stack Area -->
                         <div class="flex flex-col flex-1 items-center justify-between mt-6 min-h-0">
-                            
-                            <!-- Title -->
                             <div class="text-center w-full">
                                 <h3 class="text-xl font-extrabold text-white tracking-tight">${brand.name}</h3>
                             </div>
 
-                            <!-- Centered Clean Keywords Box (Clickable for copy logic with thin scrollbar) -->
                             <div class="text-center w-full flex flex-col justify-center min-h-0 my-auto">
                                 <span class="text-[10px] font-bold text-gray-500 lowercase tracking-widest mb-1.5 select-none">keywords</span>
                                 
@@ -584,7 +531,6 @@
                                 </div>
                             </div>
 
-                            <!-- Static GEO Flags in Row (Hide scrollbars) -->
                             <div class="flex items-center justify-center flex-wrap gap-2 pt-2 pb-1 w-full max-h-[60px] overflow-y-auto mt-2 no-scrollbar">
                                 ${brand.geos.map((geo, idx) => {
                                     return `
@@ -596,15 +542,12 @@
                                     `;
                                 }).join('')}
                             </div>
-
                         </div>
-
                     </div>
                 `;
                 grid.insertAdjacentHTML('beforeend', cardHtml);
             });
 
-            // Reinitialize Lucide Icons & Ultra-smooth 3D Tilt Hook
             lucide.createIcons();
             setupTiltEffect();
         }
@@ -618,7 +561,6 @@
                 return `${prefix}: ${g.keys.join(', ')}`;
             }).join(' | ');
 
-            // Create temporary input element to execute copy safely in nested frame structures
             const tempEl = document.createElement('textarea');
             tempEl.value = compiledKeysString;
             tempEl.style.position = 'fixed';
@@ -661,18 +603,15 @@
             const x = e.clientX - cardRect.left;
             const y = e.clientY - cardRect.top;
             
-            // Reduced to maximum 6 degrees tilt to decrease sensitivity and avoid jumpy reactions
             const xRotation = -6 * ((y - cardHeight / 2) / (cardHeight / 2));
             const yRotation = 6 * ((x - cardWidth / 2) / (cardWidth / 2));
             
-            // Extremely smooth scaling factor (1.015 instead of 1.03) for heavy weight card feel
             card.style.transform = `perspective(1000px) scale3d(1.015, 1.015, 1.015) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
             card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.6)';
         }
 
         function handleMouseLeave(e) {
             const card = e.currentTarget;
-            // Transition is fully simulated back with a custom transition bezier curve
             card.style.transform = 'perspective(1000px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg)';
             card.style.boxShadow = 'none';
         }
@@ -683,7 +622,6 @@
             });
         }
 
-        /* Edit GEO Context Menu Logic */
         function triggerGeoEditModal(e, brandId, geoIndex) {
             e.preventDefault(); 
             activeBrandId = brandId;
@@ -699,7 +637,6 @@
             document.getElementById('active-edit-geoname').textContent = `${geo.name} (${geo.code})`;
             document.getElementById('active-edit-keys-input').value = geo.keys.join(', ');
 
-            // Render existing countries list
             const listContainer = document.getElementById('edit-geos-list');
             listContainer.innerHTML = brand.geos.map((g, idx) => `
                 <div class="flex items-center justify-between bg-brandDark/50 p-2.5 rounded-lg border border-brandBorder/55">
@@ -715,14 +652,12 @@
                 </div>
             `).join('');
 
-            // Fill Select Box with remaining countries
             const selectGeo = document.getElementById('edit-new-geo-select');
             selectGeo.innerHTML = '<option value="" disabled selected>-- Выберите страну --</option>' + 
                 PREDEFINED_COUNTRIES
                     .filter(c => !brand.geos.some(g => g.code === c.code))
                     .map(c => `<option value="${c.code}">${c.name} (${c.code})</option>`).join('');
 
-            // Apply 7 GEO Limit Controls inside modal UI
             const addBtn = document.querySelector('button[onclick="addGeoToActiveBrand()"]');
             const limitWarning = document.getElementById('geo-limit-warning');
 
@@ -776,7 +711,6 @@
             const brand = brands.find(b => b.id === activeBrandId);
             if (!brand) return;
 
-            // Enforce hard block of 7 GEO Limit on execution
             if (brand.geos.length >= 7) {
                 showToast("Достигнут лимит: максимум 7 GEO!");
                 return;
@@ -789,14 +723,11 @@
             const config = PREDEFINED_COUNTRIES.find(c => c.code === code);
             if (!config) return;
 
-            // Seed keys with brand name or keep empty depending on flow
-            const baseKeys = [];
-
             brand.geos.push({
                 code: config.code,
                 name: config.name,
                 flag: config.flag,
-                keys: baseKeys
+                keys: []
             });
 
             saveDatabase();
@@ -813,7 +744,6 @@
             brand.geos.splice(geoIdx, 1);
 
             saveDatabase();
-            // Reset active index to first country safe zone
             activeGeoIndex = 0;
             triggerGeoEditModal({ preventDefault: () => {} }, activeBrandId, 0);
             renderBrands(document.getElementById('search-input').value);
