@@ -178,7 +178,6 @@
 
     <!-- Scripting and Database Management -->
     <script>
-        // 1. ВСЕ КОНСТАНТЫ И ВНОСИМЫЕ ДАННЫЕ В САМОМ ВЕРХУ
         const PREDEFINED_COUNTRIES = [
             { code: 'GB', name: 'Глобальные', flag: 'gb' },
             { code: 'ES', name: 'Испания', flag: 'es' },
@@ -193,6 +192,13 @@
             { code: 'UZ', name: 'Узбекистан', flag: 'uz' },
             { code: 'TR', name: 'Турция', flag: 'tr' },
             { code: 'MX', name: 'Мексика', flag: 'mx' },
+            { code: 'CA', name: 'Канада', flag: 'ca' },
+            { code: 'PT', name: 'Португалия', flag: 'pt' },
+            { code: 'GR', name: 'Греция', flag: 'gr' },
+            { code: 'NL', name: 'Нидерланды', flag: 'nl' },
+            { code: 'CO', name: 'Колумбия', flag: 'co' },
+            { code: 'RU', name: 'Россия', flag: 'ru' },
+            { code: 'LA', name: 'Лат. Америка', flag: 'un' }
         ];
 
         const CORE_BRAND_IDS = [
@@ -218,21 +224,62 @@
                 { code: 'UA', name: 'Украина', flag: 'ua', keys: ['1win ua', '1win скачати'] }
             ],
             'roobet': [
-                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet casino', 'roobet crypto casino', 'roobet game', 'roo bet, roobet game app money'] },
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet casino', 'roobet crypto casino', 'roobet game', 'roo bet', 'roobet game app money'] },
                 { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
                 { code: 'CA', name: 'Канада', flag: 'ca', keys: [] },
                 { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
             ],
             'pokerstarscasino': [
-                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['poker online for real money', 'poker network', 'pokerstar', 'pokerstars', 'poker stars', 'poker star', 'dbg poker', 'pokerstars live pokerstars casino','pokerstars play', 'poker star casino', 'pokerstars casino uk', 'pokerstars casino uk app', 'pokerstars uk'] },
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['poker online for real money', 'poker network', 'pokerstar', 'pokerstars', 'poker stars', 'poker star', 'dbg poker', 'pokerstars live pokerstars casino', 'pokerstars play', 'poker star casino', 'pokerstars casino uk', 'pokerstars casino uk app', 'pokerstars uk'] },
                 { code: 'IT', name: 'Италия', flag: 'it', keys: [] },
                 { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
                 { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
                 { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
-                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
-
-
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] }
             ],
+            'interwetten': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['interwetten', 'sportwetten online', 'sportwetten', 'interwetten sportwetten app', 'interwetten app', 'interwetten app casino', 'interwetten mobile'] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: [] },
+                { code: 'GR', name: 'Греция', flag: 'gr', keys: [] }
+            ],
+            'jackpotpiraten': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['jackpotpiraten', 'jackpotpiraten slots', 'jackpotpiraten app', 'jackpotpiraten casino', 'jackpot piraten', 'jackpot piraten casino'] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] }
+            ],
+            'ladbrokes': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['ladbrokes', 'ladbrokes casino', 'ladbrokers', 'lad brokes', 'ladbrokes poker', 'ladbrokes mobile app'] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
+                { code: 'NL', name: 'Нидерланды', flag: 'nl', keys: [] }
+            ],
+            'luckia': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['luckia', 'luckia casino colombia', 'luckia apuestas y casino', 'lukia', 'luckia casino', 'luckia app', 'luckia apuestas', 'luckia colombia', 'luckia apuestas deportivas'] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'CO', name: 'Колумбия', flag: 'co', keys: [] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] }
+            ],
+            'lunubet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['lunubet', 'lunu bet'] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
+            ],
+            'bplay': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['bplay', 'b play', 'bplay casino', 'bplay app', 'bplay futbol', 'bplay casino online buenos aires', 'bplay juegos', 'b play apuestas deportivas', 'b play apuestas', 'bplay futbol apuestas'] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'KZ', name: 'Казахстан', flag: 'kz', keys: [] },
+                { code: 'RU', name: 'Россия', flag: 'ru', keys: [] },
+                { code: 'LA', name: 'Лат. Америка', flag: 'un', keys: [] }
+            ],
+            'lottomatica': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['lottomatica', 'app lottomatica', 'lottomatica scommesse', 'rivenditori lottomatica', 'casino lottomatica', 'lottomatica it', 'lottomatica app ufficiale', 'better lottomatica app', 'lottomatica app', 'lotto matica'] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: [] }
+            ],
+            'thundercoins': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['thunder coins', 'thunder coins slot', 'thunder coins hold and win', 'thunder coins xxl', 'thunder coins playson', 'thunder coins casino', 'playson slots', 'playson hold and win', 'coin hold and win', 'thunder slots', 'lightning coins slot', 'thunder strike slot', 'coins hold and win'] }
+            ]
         };
 
         const brandNames = [
@@ -258,7 +305,7 @@
             { id: 'betsson', name: 'Betsson', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Betsson_logo.svg/1024px-Betsson_logo.svg.png' },
             { id: 'betwarrior', name: 'Betwarrior', logo: 'https://placehold.co/200x200/151D30/FF6600?text=Warrior' },
             { id: 'bodog', name: 'Bodog', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Bodog_Logo.svg/512px-Bodog_Logo.svg.png' },
-            { id: 'bplay', name: 'Bplay', logo: 'https://placehold.co/200x200/151D30/FFFF00?text=Bplay' },
+            { id: 'bplay', name: 'Bplay', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0bzOa3aQXplzhbxCFmfP95WmL4YcFfo5FdMjASjPNQ&s' },
             { id: 'bwin', name: 'Bwin', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYoCtHU-2mrLTcP73ZHHQOaKW0RtuD-fCWyvj__Fltwg&s' },
             { id: 'caliente', name: 'Caliente', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Caliente_Logo.png' },
             { id: 'casibom', name: 'Casibom', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Casibom' },
@@ -281,19 +328,19 @@
             { id: 'goldbet', name: 'GoldBet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU-IISMSCjOePWovrW_iOr66qBSU9IQHXlYX11Wbbe7Q&s=10' },
             { id: 'hardrockcasino', name: 'hard rock casino', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Hard_Rock_Cafe_logo.svg' },
             { id: 'hollandcasino', name: 'Holland Casino', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Holland_Casino_logo.svg/1024px-Holland_Casino_logo.svg.png' },
-            { id: 'interwetten', name: 'Interwetten', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Interwetten-Logo.svg/512px-Interwetten-Logo.svg.png' },
+            { id: 'interwetten', name: 'Interwetten', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbAG3kqLlHn2_xPA_ps5I4ZxwvhTVp-XSjVQYjwyOZeA&s=10' },
             { id: 'jackpotcity', name: 'Jackpot City', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEM5BePhyywK3OM7ukirAswarrg5_xM43fPChfiA6yEA&s=10' },
             { id: 'jugabet', name: 'Jugabet', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Jugabet' },
-            { id: 'jackpotpiraten', name: 'JackpotPiraten', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Piraten' },
+            { id: 'jackpotpiraten', name: 'JackpotPiraten', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83UhMBqGOwKTw-ZMIS3Z97KXW8Dfj1tkp_qLhhUtMEw&s=10' },
             { id: 'kingsresort', name: 'Kings resort', logo: 'https://placehold.co/200x200/151D30/D4AF37?text=Kings' },
-            { id: 'ladbrokes', name: 'Ladbrokes', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ladbrokes_logo.svg/1024px-Ladbrokes_logo.svg.png' },
+            { id: 'ladbrokes', name: 'Ladbrokes', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUWgKvzfZQoRr9zwBuiVnHOkhaxmxHOXHT06NEvgpQmw&s=10' },
             { id: 'leovegas', name: 'LeoVegas', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTvwkwfRTRL8vCLJ6UVVoH8F_cIUWfEgZIyA9rrIcfSQ&s=10' },
             { id: 'linebet', name: 'linebet', logo: 'https://placehold.co/200x200/151D30/00FF66?text=Linebet' },
             { id: 'locowin', name: 'Locowin', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Locowin' },
-            { id: 'lottomatica', name: 'Lottomatica', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Lottomatica_Logo.png' },
+            { id: 'lottomatica', name: 'Lottomatica', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvxD20ad7xxj1vjAv7FbGhCsJrVJ_SAhWKvLy0D3DIYw&s=10' },
             { id: 'lowenplay', name: 'löwen Play', logo: 'https://placehold.co/200x200/151D30/0033CC?text=Lowen' },
-            { id: 'luckia', name: 'Luckia', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Logo_Luckia_apuestas.png/1024px-Logo_Luckia_apuestas.png' },
-            { id: 'lunubet', name: 'LunuBet', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Lunu' },
+            { id: 'luckia', name: 'Luckia', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuT3ue2VN6uN3eK8c569fMLU_gL7IbDv88Ee9hMha_6A&s=10' },
+            { id: 'lunubet', name: 'LunuBet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYNbJQ9LoqR6QFD5Yygx36AeqnjK2ytWOHXqqbkHEtw&s=10' },
             { id: 'lvbet', name: 'LV BET', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/14/LV_Bet_logo.png' },
             { id: 'mariacasino', name: 'Maria Casino', logo: 'https://placehold.co/200x200/151D30/FF0066?text=Maria' },
             { id: 'melbet', name: 'melbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Melbet_logo.png' },
@@ -340,6 +387,7 @@
             { id: 'starzbet', name: 'Starzbet', logo: 'https://placehold.co/200x200/151D30/00CCFF?text=Starz' },
             { id: 'starvegas', name: 'StarVegas', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Vegas' },
             { id: 'superbet', name: 'Superbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Superbet_Logo.png/1024px-Superbet_Logo.png' },
+            { id: 'thundercoins', name: 'Thunder Coins', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREuCxeTibdehw7y-9V4eMkNok4CI6gKZKYsCA8ouJFYA&s=10' },
             { id: 'tipico', name: 'Tipico', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Tipico_logo.svg/1024px-Tipico_logo.svg.png' },
             { id: 'tipsport', name: 'Tipsport', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Tipsport_Logo.svg/512px-Tipsport_Logo.svg.png' },
             { id: 'totosport', name: 'Toto Sport', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Toto' },
@@ -369,7 +417,6 @@
             { id: 'big-bass-bonanza', name: 'Big Bass Bonanza', logo: 'https://images.igamingcloud.com/game/pragmatic/big-bass-bonanza/logo.png' }
         ];
 
-        // 2. ФОРМИРОВАНИЕ БАЗОВЫХ ДАННЫХ
         const defaultBrandsData = brandNames.map(b => {
             const formattedName = b.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             
@@ -401,8 +448,7 @@
             };
         });
 
-        // 3. ОСНОВНАЯ ЛОГИКА И СТАРТ
-        const DB_KEY = 'brand_hub_db_v4.0_fixed';
+        const DB_KEY = 'brand_hub_db_v5.0_fixed';
         let brands = [];
         let activeTab = 'all';
 
@@ -450,7 +496,6 @@
                 });
             } catch (err) {
                 console.error("Init Error:", err);
-                // Запасной фоллбек на чистые данные если что-то сбойнуло
                 brands = JSON.parse(JSON.stringify(defaultBrandsData));
                 renderBrands();
             }
