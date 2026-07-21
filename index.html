@@ -316,7 +316,7 @@
             { id: 'rivercreecasino', name: 'river cree casino', logo: 'https://placehold.co/200x200/151D30/FFFFFF?text=RiverCree' },
             { id: 'rivalo', name: 'Rivalo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Rivalo_Logo.png/1024px-Rivalo_Logo.png' },
             { id: 'rocketplay', name: 'RocketPlay', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Rocket' },
-            { id: 'roobet', name: 'roobet', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/be/Roobet_logo.png' },
+            { id: 'roobet', name: 'roobet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAUCQFM2x04QTjcrSpgViNyfBaJBMyR5h_vfmIuSmbwQ&s=10' },
             { id: 'rushbet', name: 'Rushbet', logo: 'https://placehold.co/200x200/151D30/0033FF?text=Rushbet' },
             { id: 'sazka', name: 'Sazka', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Sazka_logo.svg' },
             { id: 'sisal', name: 'Sisal', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Sisal_logo.png' },
@@ -389,6 +389,21 @@
                         { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
                         { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
                         { code: 'ES', name: 'Испания', flag: 'es', keys: [] }
+                    ]
+                };
+            }
+
+             if (b.id === 'roobet') {
+                return {
+                    id: 'roobet',
+                    name: 'Roobet',
+                    logo: b.logo,
+                    category: category,
+                    geos: [
+                        { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['roobet', 'roobet casino', 'roo bet', 'roobet crypto casino', 'roobet game', 'roobet game app money'] },
+                        { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                        { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
+                        { code: 'CA', name: 'Канада', flag: 'ca', keys: [] }
                     ]
                 };
             }
