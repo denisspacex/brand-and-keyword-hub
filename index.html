@@ -198,6 +198,11 @@
             { code: 'NL', name: 'Нидерланды', flag: 'nl' },
             { code: 'CO', name: 'Колумбия', flag: 'co' },
             { code: 'RU', name: 'Россия', flag: 'ru' },
+            { code: 'HU', name: 'Венгрия', flag: 'hu' },
+            { code: 'NO', name: 'Норвегия', flag: 'no' },
+            { code: 'CZ', name: 'Чехия', flag: 'cz' },
+            { code: 'RO', name: 'Румыния', flag: 'ro' },
+            { code: 'HR', name: 'Хорватия', flag: 'hr' },
             { code: 'LA', name: 'Лат. Америка', flag: 'un' }
         ];
 
@@ -211,6 +216,61 @@
 
         /* 💡 СЮДА ВНОСИМ КАСТОМНЫЕ GEO И КЛЮЧИ ИЗ КОДА */
         const CUSTOM_BRAND_GEOS = {
+            'favbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['favbet', 'favbet casino', 'favbet online srl', 'fav', 'fav bet'] },
+                { code: 'UA', name: 'Украина', flag: 'ua', keys: ['favbet', 'favbet favbet', 'fawbet', 'фавбет казино', 'фавбет', 'фавбе', 'фабет', 'фав бет', 'фаф бет', 'фавбет бонус'] },
+                { code: 'RO', name: 'Румыния', flag: 'ro', keys: [] },
+                { code: 'HR', name: 'Хорватия', flag: 'hr', keys: [] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] }
+            ],
+            'mostbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['mostbet', 'mosbet', 'mostbet com', 'online mostbet', 'mostbet new', 'most bet', 'mostbet bk', 'mostbet line', 'mosbet apps', 'mostbet sports', 'mostbet live', 'mostbet casino', 'mostbet original', 'mostmet', 'mostbet az', 'mostbet checker event'] },
+                { code: 'RU', name: 'Россия', flag: 'ru', keys: ['мостбет', 'mostbet', 'мосбет', 'мост бет', 'mosbet', 'mostbet com', 'online mostbet', 'мостбет лига', 'most bet онлайн', 'mostbet new', 'мост бэт', 'мостбэт', 'most bet ставки на спорт', 'most bet', 'мостбет ставки онлайн', 'мостбет ру', 'букмекерская контора мостбет', 'мостбет букмекерская контора', 'mostbet bk', 'mostbet line', 'mostbet онлайн', 'слоты мостбет', 'mostbet ставки онлайн', 'мостбет лайв', 'mosbet apps', 'мостбет official', 'мостбет мобильная версия', 'most bet ставки', 'mostbet sports', 'mostbet live', 'мостбет sport', 'mostbet скачать', 'мостбет узбекистан', 'mostbet casino', 'mostbet казино', 'mostbet original'] },
+                { code: 'KZ', name: 'Казахстан', flag: 'kz', keys: [] },
+                { code: 'HU', name: 'Венгрия', flag: 'hu', keys: [] },
+                { code: 'PL', name: 'Польша', flag: 'pl', keys: [] },
+                { code: 'CO', name: 'Колумбия', flag: 'co', keys: [] },
+                { code: 'CZ', name: 'Чехия', flag: 'cz', keys: [] },
+                { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
+                { code: 'TR', name: 'Турция', flag: 'tr', keys: [] }
+            ],
+            'planetwin365': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['planetwin365', 'planetwin', 'planet win 365', 'planetwin 365', 'planetwin365 mobile app poker', 'planetwin365 mobile app', 'planetwin365 android app', 'planetwin365 scommesse online', 'planetwin casino', 'planetwin365 casino'] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'NO', name: 'Норвегия', flag: 'no', keys: [] }
+            ],
+            'betclic': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['betclic', 'betclic sport app', 'betclic casino', 'betxlic', 'app betclic', 'bet clic', 'betclik', 'betclick', 'betlick', 'betlic', 'betclic app betclic poker'] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
+                { code: 'PL', name: 'Польша', flag: 'pl', keys: ['betclic zakłady bukmacherskie', 'betclic zakłady', 'betclic aplikacja'] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'LA', name: 'Лат. Америка', flag: 'un', keys: [] }
+            ],
+            'betnacional': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['betnacional', 'betnacional apostas app', 'nacional bet', 'betnacional online', 'bet nacional app', 'bet nacional', 'betnacional apostas online', 'betnacional app oficial', 'baixar app betnacional'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
+                { code: 'HU', name: 'Венгрия', flag: 'hu', keys: [] },
+                { code: 'TR', name: 'Турция', flag: 'tr', keys: [] }
+            ],
+            'gatesofolympus': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['gates of olympus', 'gates of olympus casino', 'gates of the olymp', 'olympus casino', 'gates of', 'gates of olympus 1000', 'olympus gates', 'olympus gate gates of olympus', 'olympus gate', 'olympus slot'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'TR', name: 'Турция', flag: 'tr', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
+                { code: 'RU', name: 'Россия', flag: 'ru', keys: [] }
+            ],
+            'apuestatotal': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: [] },
+                { code: 'LA', name: 'Лат. Америка', flag: 'un', keys: ['tu apuesta total', 'total apuesta', 'apuesta total deportivas', 'apuesta total app', 'apuesta total peru app', 'apuesta total casino', 'apuestatotal', 'apuesta total online', 'total apuestas', 'apuestas total'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
+            ],
             'goldbet': [
                 { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['goldbet', 'goldbet app', 'goldbet bet', 'gold bet', 'goldenbet', 'golden bet', 'golbet', 'gol bet'] },
                 { code: 'IT', name: 'Италия', flag: 'it', keys: ['goldbet sportive', 'goldbet scommesse sportive', 'goldbet scommesse', 'goldbet scommesse sportive app'] },
@@ -296,7 +356,7 @@
             { id: 'bet365', name: 'Bet365', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYURZgRbH51UXBsKJ7HYz2jhgk2AqrtRD7EdgVciL2dA&s=10' },
             { id: 'betano', name: 'Betano', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Betano_logo.svg/1024px-Betano_logo.svg.png' },
             { id: 'betcris', name: 'Betcris', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Betcris_Logo.png' },
-            { id: 'betclic', name: 'Betclic', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Logo-Betclic.png/1024px-Logo-Betclic.png' },
+            { id: 'betclic', name: 'Betclic', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4pe6fgiKTwchq2T6oN9KNtna4cGgCUBTJJ4QToPAWkw&s' },
             { id: 'betboom', name: 'BetBoom', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/BetBoom_Logo.svg/1024px-BetBoom_Logo.svg.png' },
             { id: 'betcity', name: 'BetCity', logo: 'https://placehold.co/200x200/151D30/00FFFF?text=BetCity' },
             { id: 'betfair', name: 'Betfair', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Betfair_logo.svg/1024px-Betfair_logo.svg.png' },
@@ -320,10 +380,10 @@
             { id: 'efbet', name: 'Efbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Efbet_logo.png/1024px-Efbet_logo.png' },
             { id: 'estrelabet', name: 'Estrela bet', logo: 'https://placehold.co/200x200/151D30/FFD700?text=Estrela' },
             { id: 'eurobet', name: 'eurobet', logo: 'https://placehold.co/200x200/151D30/003399?text=Eurobet' },
-            { id: 'favbet', name: 'Favbet', logo: 'https://yt3.googleusercontent.com/dPD6Rk5VlmMn8YX5HgV5r41bzqqxnNsuy5mAQwno6fbHldAOk-f0dpmKUVCfV8AKV0MDV4jj=s900-c-k-c0x00ffffff-no-rj' },
+            { id: 'favbet', name: 'Favbet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSuGjkPCPPlJqqUEPVQCPwMSkaj1bM5Q_JpGKQHwa0cQ&s=10' },
             { id: 'fortunacasino', name: 'Fortuna Casino', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjs6OkTBID9B8sXUGBYeBacregh3TQrSfJOv_DaLnxrQ&s=10' },
             { id: 'gamdom', name: 'Gamdom', logo: 'https://placehold.co/200x200/151D30/33FF33?text=Gamdom' },
-            { id: 'gatesofolympus', name: 'gates of olympus', logo: 'https://images.igamingcloud.com/game/pragmatic/gates-of-olympus/logo.png' },
+            { id: 'gatesofolympus', name: 'gates of olympus', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKKg6xo7Pj4T0_gXioKUux46BMyMFpC6I7DVqPZ8pEvA&s=10' },
             { id: 'ggbet', name: 'GGbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/GG_Bet_Logo.svg/1024px-GG_Bet_Logo.svg.png' },
             { id: 'goldbet', name: 'GoldBet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU-IISMSCjOePWovrW_iOr66qBSU9IQHXlYX11Wbbe7Q&s=10' },
             { id: 'hardrockcasino', name: 'hard rock casino', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Hard_Rock_Cafe_logo.svg' },
@@ -346,7 +406,7 @@
             { id: 'melbet', name: 'melbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Melbet_logo.png' },
             { id: 'merkurcasino', name: 'merkur casino', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0a/Merkur_Spielothek_logo.svg' },
             { id: 'misli', name: 'misli', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Misli' },
-            { id: 'mostbet', name: 'Mostbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Mostbet_Logo.png' },
+            { id: 'mostbet', name: 'Mostbet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6LYQrQEgxGyhQpzdycjZUDXqI4kRfymk3BjlZf3Ybw&s=10' },
             { id: 'mrbet', name: 'mr bet', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=MrBet' },
             { id: 'n1bet', name: 'N1 Bet', logo: 'https://placehold.co/200x200/151D30/FF3300?text=N1' },
             { id: 'neospincasino', name: 'Neospin Casino', logo: 'https://placehold.co/200x200/151D30/00CCFF?text=Neospin' },
@@ -357,7 +417,7 @@
             { id: 'parimatch', name: 'Parimatch', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Parimatch_Logo.png' },
             { id: 'parionssport', name: 'Parions Sport', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Parions_Sport_logo.svg/512px-Parions_Sport_logo.svg.png' },
             { id: 'platincasino', name: 'Platincasino', logo: 'https://placehold.co/200x200/151D30/FFFFFF?text=Platin' },
-            { id: 'planetwin365', name: 'Planet win 365', logo: 'https://placehold.co/200x200/151D30/FFCC00?text=Pwin365' },
+            { id: 'planetwin365', name: 'Planet win 365', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBo8CCUm3L_FSdehkpoTLKhD9U_P6KSrOIGovMueToZw&s=10' },
             { id: 'pmu', name: 'PMU', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Pmu_logo_green.svg/1024px-Pmu_logo_green.svg.png' },
             { id: 'pokerstarscasino', name: 'PokerStars casino', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFVG5aR3mKkhVhznNUz6mhIwTpqscabn8b51GEE_dpkw&s=10' },
             { id: 'pinup', name: 'pin up', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Pin-up-gaming-logo.png' },
@@ -448,7 +508,7 @@
             };
         });
 
-        const DB_KEY = 'brand_hub_db_v5.0_fixed';
+        const DB_KEY = 'brand_hub_db_v8.6_favbet_fix';
         let brands = [];
         let activeTab = 'all';
 
