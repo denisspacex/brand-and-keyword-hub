@@ -181,6 +181,7 @@
         const PREDEFINED_COUNTRIES = [
             { code: 'GB', name: 'Глобальные', flag: 'gb' },
             { code: 'ES', name: 'Испания', flag: 'es' },
+            { code: 'SE', name: 'Швеция', flag: 'se' },
             { code: 'BR', name: 'Бразилия', flag: 'br' },
             { code: 'DE', name: 'Германия', flag: 'de' },
             { code: 'AT', name: 'Австрия', flag: 'at' },
@@ -201,6 +202,7 @@
             { code: 'HU', name: 'Венгрия', flag: 'hu' },
             { code: 'NO', name: 'Норвегия', flag: 'no' },
             { code: 'CZ', name: 'Чехия', flag: 'cz' },
+            { code: 'SK', name: 'Словакия', flag: 'sk' },
             { code: 'RO', name: 'Румыния', flag: 'ro' },
             { code: 'HR', name: 'Хорватия', flag: 'hr' },
             { code: 'LA', name: 'Лат. Америка', flag: 'un' }
@@ -214,8 +216,80 @@
 
         const TRASH_BRAND_IDS = ['bran', 'worldcupbet'];
 
-        /* 💡 СЮДА ВНОСИМ КАСТОМНЫЕ GEO И КЛЮЧИ ИЗ КОДА */
+        /* 💡 КАСТОМНЫЕ GEO И КЛЮЧИ ИЗ КОДА */
         const CUSTOM_BRAND_GEOS = {
+            'casumo': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['casumo casino', 'casumo app', 'casumo casino app', 'casumo', 'casumo casino app real money'] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'SE', name: 'Швеция', flag: 'se', keys: [] },
+                { code: 'CA', name: 'Канада', flag: 'ca', keys: [] }
+            ],
+            'sportsbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['sportsbet', 'sportbet', 'sportsbet app for android', 'sports bet app', 'sports bet', 'sport betting', 'sports betting', 'sportsbet online betting app', 'sports bets', 'sportsbet app download', 'sportsbet app', 'sports betting 2025', 'sports betting apps', 'sports betting apps for real cash', 'sports betting apps for real cash out'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] }
+            ],
+            'betano': [
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
+                { code: 'LA', name: 'Лат. Америка', flag: 'un', keys: [] },
+                { code: 'RO', name: 'Румыния', flag: 'ro', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'CZ', name: 'Чехия', flag: 'cz', keys: [] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: [] }
+            ],
+            'fortunacasino': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['fortuna casino', 'fortuna', 'casino fortuna', 'i fortuna', 'ifortuna', 'fortuna app', 'fortuna poker', 'fortuna sport', 'poker fortuna', 'furtuna', 'gm fortuna'] },
+                { code: 'RO', name: 'Румыния', flag: 'ro', keys: ['efortuna casino', 'efortuna', 'fortuna romania', 'fortuna pariuri sportive romania'] },
+                { code: 'SK', name: 'Словакия', flag: 'sk', keys: ['fortuna aplikacia sk'] },
+                { code: 'CZ', name: 'Чехия', flag: 'cz', keys: [] }
+            ],
+            'casinoniagara': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['niagara casino online', 'casino niagara', 'casino niagara online', 'seneca niagara casino', 'seneca niagara casino app', 'fallsview casino online', 'fallsview casino app', 'fallsview niagara casino', 'casino niagara app', 'niagara casino app', 'fallsview casino resort app'] },
+                { code: 'CA', name: 'Канада', flag: 'ca', keys: [] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] }
+            ],
+            'starvegas': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['starvegas', 'star vegas', 'starvegas slot', 'starvegas mobile', 'starvegas casino app', 'starvegas casino online', 'starvegas app'] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: [] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'CZ', name: 'Чехия', flag: 'cz', keys: [] }
+            ],
+            'vbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['vbet', 'vbet app', 'v-bet', 'vbet sport', 'vbet casino', 'vbet easy', 'vbet casino armenia', 'vbet romania', 'vbet sports betting', 'vbet nl'] },
+                { code: 'UA', name: 'Украина', flag: 'ua', keys: ['vbet казино', 'ві бет', 'вібет', 'vbet ставки', 'вбет ставки', 'в бет ставки', 'v bet ставки', 'в бет казино', 'вбет казино', 'вiбет', 'вбет ставки на спорт', 'вбет', 'вбет украина', 'vbet ua', 'вбет україна'] },
+                { code: 'FR', name: 'Франция', flag: 'fr', keys: ['vbet paris sportifs en ligne', 'vbet paris sportifs', 'vbet paris sportif', 'vbet paris'] },
+                { code: 'RU', name: 'Россия', flag: 'ru', keys: [] },
+                { code: 'NL', name: 'Нидерланды', flag: 'nl', keys: [] },
+                { code: 'RO', name: 'Румыния', flag: 'ro', keys: [] }
+            ],
+            'hardrockcasino': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['hard rock casino', 'hard rock blackjack & casino', 'hardrock casino', 'unity by hard rock', 'hardrockcasino', 'hard rock social casino', 'hard rock jackpot', 'hard rock slot'] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'TR', name: 'Турция', flag: 'tr', keys: [] }
+            ],
+            'bet365': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['bet365', '365bet', '365 bet', 'bet 365', 'bet365 casino', 'bet 365 casino', '365 betting app', 'bet365 canada', 'bt365', 'bet365 app', 'bet 356', 'bet poker', 'bet casino', 'bet365 poker', 'poker bet 365', '365 bets', '336 bet', 'bet 365 games', 'best 365', 'real bet365', 'bet365 official app', 'bat365'] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: ['bet365 apuestas'] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: ['bet365 apostas', 'apostas futebol bet365', 'bet365 entrar', 'bet365 jogo de aposta', 'bet365 site de apostas', 'bet 360 apostas online', 'bet365 brasil apostas online', 'aposta esportiva bet365', 'bet365 apostas esportivas'] },
+                { code: 'CA', name: 'Канада', flag: 'ca', keys: [] },
+                { code: 'IT', name: 'Италия', flag: 'it', keys: [] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'LA', name: 'Лат. Америка', flag: 'un', keys: [] }
+            ],
+            '22bet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['22bet', '22bet app', '22bet app for android', 'bet22', '22 bet', '22bet app download', '22bet mobile app download'] },
+                { code: 'DE', name: 'Германия', flag: 'de', keys: [] },
+                { code: 'BR', name: 'Бразилия', flag: 'br', keys: [] },
+                { code: 'ES', name: 'Испания', flag: 'es', keys: [] },
+                { code: 'PT', name: 'Португалия', flag: 'pt', keys: [] },
+                { code: 'LA', name: 'Лат. Америка', flag: 'un', keys: [] }
+            ],
+            'ggbet': [
+                { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['ggbet', 'ggbet app', 'gg bet', 'ggbet online casino'] }
+            ],
             'favbet': [
                 { code: 'GB', name: 'Глобальные', flag: 'gb', keys: ['favbet', 'favbet casino', 'favbet online srl', 'fav', 'fav bet'] },
                 { code: 'UA', name: 'Украина', flag: 'ua', keys: ['favbet', 'favbet favbet', 'fawbet', 'фавбет казино', 'фавбет', 'фавбе', 'фабет', 'фав бет', 'фаф бет', 'фавбет бонус'] },
@@ -346,7 +420,7 @@
             { id: '1win', name: '1Win', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcP8iFNA29EaGo0yCOV5OXeGoMNo3nAFMHUxgW84skMQ&s=10' },
             { id: '1xbet', name: '1xBet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3QIzlBG4kFkBKP-5rkft9tKc2I7w8g4rcyKAQs3xt6g&s=10' },
             { id: '20bet', name: '20Bet', logo: 'https://images.igamingcloud.com/game/pragmatic/big-bass-bonanza/logo.png' },
-            { id: '22bet', name: '22Bet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/22Bet_Logo.svg/512px-22Bet_Logo.svg.png' },
+            { id: '22bet', name: '22Bet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3bQQBrC5s9lCOpWfAhbqXS8xOkzByzIGmbe4F941_IA&s=10' },
             { id: '711casino', name: '711 Casino', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKdhE2gRlNEe_3Fz5aVlmTTV-x_47W_A0THGFgc4rKog&s=10' },
             { id: 'bran', name: 'Bran', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Bran' },
             { id: 'admiralbet', name: 'Admiralbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Admiral_Gaming_Logo.png' },
@@ -354,7 +428,7 @@
             { id: 'bancocasino', name: 'Banco Casino', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Banco' },
             { id: 'bcgame', name: 'BC Game', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA6yGbCdEhLLlHq0CNbOjW3VBFvyTbNZzQpoaY5c-aiA&s=10' },
             { id: 'bet365', name: 'Bet365', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYURZgRbH51UXBsKJ7HYz2jhgk2AqrtRD7EdgVciL2dA&s=10' },
-            { id: 'betano', name: 'Betano', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Betano_logo.svg/1024px-Betano_logo.svg.png' },
+            { id: 'betano', name: 'Betano', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYbBuKFSGhUyDF2cNCjU7s0cdbSCYTLTHguHRDAXU_kg&s=10' },
             { id: 'betcris', name: 'Betcris', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Betcris_Logo.png' },
             { id: 'betclic', name: 'Betclic', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4pe6fgiKTwchq2T6oN9KNtna4cGgCUBTJJ4QToPAWkw&s' },
             { id: 'betboom', name: 'BetBoom', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/BetBoom_Logo.svg/1024px-BetBoom_Logo.svg.png' },
@@ -371,7 +445,7 @@
             { id: 'casibom', name: 'Casibom', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Casibom' },
             { id: 'casinomontreal', name: 'Casino Montreal', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsHeB9eWpPCx3_baohibKQg96DVu0dvtVUeNrWWs-59Q&s=10' },
             { id: 'casinoniagara', name: 'Casino Niagara', logo: 'https://hapka.pw/UZmYB' },
-            { id: 'casumo', name: 'Casumo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Casumo_logo_2019.png/512px-Casumo_logo_2019.png' },
+            { id: 'casumo', name: 'Casumo', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0l0efCFgMVVgF4GOw_qxZ5CfGjK39qYTJPq-HHvPyng&s=10' },
             { id: 'codere', name: 'Codere', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/da/Codere_Logo.png' },
             { id: 'coralcasino', name: 'Coral casino', logo: 'https://placehold.co/200x200/151D30/0033FF?text=Coral' },
             { id: 'cresuscasino', name: 'Cresus Casino', logo: 'https://placehold.co/200x200/151D30/006600?text=Cresus' },
@@ -384,9 +458,9 @@
             { id: 'fortunacasino', name: 'Fortuna Casino', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjs6OkTBID9B8sXUGBYeBacregh3TQrSfJOv_DaLnxrQ&s=10' },
             { id: 'gamdom', name: 'Gamdom', logo: 'https://placehold.co/200x200/151D30/33FF33?text=Gamdom' },
             { id: 'gatesofolympus', name: 'gates of olympus', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKKg6xo7Pj4T0_gXioKUux46BMyMFpC6I7DVqPZ8pEvA&s=10' },
-            { id: 'ggbet', name: 'GGbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/GG_Bet_Logo.svg/1024px-GG_Bet_Logo.svg.png' },
+            { id: 'ggbet', name: 'GGbet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3oLW7WA-aosbgxHnruD4I6ZBFdNpGTuyOz3lG_GpL4g&s=10' },
             { id: 'goldbet', name: 'GoldBet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU-IISMSCjOePWovrW_iOr66qBSU9IQHXlYX11Wbbe7Q&s=10' },
-            { id: 'hardrockcasino', name: 'hard rock casino', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Hard_Rock_Cafe_logo.svg' },
+            { id: 'hardrockcasino', name: 'Hard Rock Casino', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMsfwt2yYuTbNi7WidcGBaAqbE9GdPaKgahiZmbfnWXQ&s=10' },
             { id: 'hollandcasino', name: 'Holland Casino', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Holland_Casino_logo.svg/1024px-Holland_Casino_logo.svg.png' },
             { id: 'interwetten', name: 'Interwetten', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbAG3kqLlHn2_xPA_ps5I4ZxwvhTVp-XSjVQYjwyOZeA&s=10' },
             { id: 'jackpotcity', name: 'Jackpot City', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEM5BePhyywK3OM7ukirAswarrg5_xM43fPChfiA6yEA&s=10' },
@@ -441,11 +515,11 @@
             { id: 'spinbetter', name: 'Spinbetter', logo: 'https://placehold.co/200x200/151D30/00FF00?text=Better' },
             { id: 'sportingbet', name: 'Sportingbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Sportingbet_logo.png' },
             { id: 'sportium', name: 'Sportium', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Sportium_logo.png' },
-            { id: 'sportsbet', name: 'Sportsbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Sportsbet.io_logo.svg/1024px-Sportsbet.io_logo.svg.png' },
+            { id: 'sportsbet', name: 'Sportsbet', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfgqKs3z4K1-479ETEJzY6JdIcO1z-RWOk1LRHchceug&s=10' },
             { id: 'stake', name: 'Stake', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Stake_logo.png' },
             { id: 'starcasino', name: 'Starcasino', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Starc' },
             { id: 'starzbet', name: 'Starzbet', logo: 'https://placehold.co/200x200/151D30/00CCFF?text=Starz' },
-            { id: 'starvegas', name: 'StarVegas', logo: 'https://placehold.co/200x200/151D30/E0A96D?text=Vegas' },
+            { id: 'starvegas', name: 'StarVegas', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSZzx9NKlRrMx9zMDfUu0rRL--GU7hMFPUOF5wx4OR9A&s=10' },
             { id: 'superbet', name: 'Superbet', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Superbet_Logo.png/1024px-Superbet_Logo.png' },
             { id: 'thundercoins', name: 'Thunder Coins', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREuCxeTibdehw7y-9V4eMkNok4CI6gKZKYsCA8ouJFYA&s=10' },
             { id: 'tipico', name: 'Tipico', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Tipico_logo.svg/1024px-Tipico_logo.svg.png' },
@@ -508,7 +582,7 @@
             };
         });
 
-        const DB_KEY = 'brand_hub_db_v8.6_favbet_fix';
+        const DB_KEY = 'brand_hub_db_v9.6_casumo_update';
         let brands = [];
         let activeTab = 'all';
 
